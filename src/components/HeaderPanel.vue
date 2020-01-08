@@ -12,16 +12,20 @@
     name: "Header",
     props: {
       year: Number,
+      kingdom: Object
     },
     data() {
       return {
-        kingdomNames: kingdomNames,
-        kingdomCode: 1
+        kingdomNames: kingdomNames
       }
     },
     computed: {
       kingdomName: function () {
-        return kingdomNames[this.kingdomCode];
+        if (this.kingdom.live) {
+          return kingdomNames[this.kingdom.code];
+        } else {
+          return '';
+        }
       }
     }
   }
@@ -31,8 +35,9 @@
   #header {
     position: relative;
     padding: 10px;
-    background: white;
+    background: #f0f0f0;
     box-shadow: 0 0 4px silver;
+    z-index: 2;
   }
   #header span + span {
     margin-left: 10px;

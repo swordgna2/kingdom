@@ -1,10 +1,5 @@
 import Vue from 'vue'
 
-// import Vuex from 'vuex'
-// import VueResource from 'vue-resource'
-// Vue.use(Vuex);
-// Vue.use(VueResource);
-
 import App from './App.vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
