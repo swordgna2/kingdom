@@ -17,7 +17,8 @@ export default class KingdomClass {
      * Автоматически создать все страны.
      */
     autoSetKingdoms () {
-        for (let i = 0; i < KingdomClass.names.length; i++) {
+        const kingdomsCount = Object.values(KingdomClass.names).length;
+        for (let i = 0; i < kingdomsCount; i++) {
             const newKingdom = new KingdomClass();
             newKingdom.code = i;
             newKingdom.setKingdomDefaults();
