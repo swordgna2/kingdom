@@ -1,5 +1,5 @@
 <template>
-    <div id="header">
+    <div class="main-header">
         <span>Королевство {{ kingdomName }}</span>
         <span>Год {{ year }}-й</span>
     </div>
@@ -30,17 +30,3 @@
         }
     }
 </script>
-
-<style scoped>
-    #header {
-        position: relative;
-        padding: 10px;
-        background: #f0f0f0;
-        box-shadow: 0 0 4px silver;
-        z-index: 2;
-    }
-
-    #header span + span {
-        margin-left: 10px;
-    }
-</style>

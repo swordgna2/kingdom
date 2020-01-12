@@ -1,15 +1,17 @@
 <template>
-    <div id="app">
+    <div class="main-wrapper">
         <!--<p>Have a crown: <font-awesome-icon icon="crown"/></p>-->
         <HeaderPanel
             v-bind:year="year"
             v-bind:kingdom="myKingdom"
         />
-        <div id="content">
-            <DialogPanel
-                v-bind:dialog-data="dialogData"
-            />
-            <StatisticsPanel/>
+        <div class="main-container">
+            <div class="main-container-inner">
+                <DialogPanel
+                    v-bind:dialog-data="dialogData"
+                />
+                <StatisticsPanel/>
+            </div>
         </div>
         <FooterPanel/>
     </div>
@@ -37,22 +39,3 @@
         }
     }
 </script>
-
-<style>
-    #app {
-        font-family: Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #555555;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    #content {
-        flex: 1;
-        display: flex;
-    }
-</style>

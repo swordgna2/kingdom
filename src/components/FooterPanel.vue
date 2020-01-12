@@ -1,5 +1,5 @@
 <template>
-    <div id="footer">
+    <div class="main-footer">
         <span>Низ</span>
     </div>
 </template>
@@ -9,13 +9,3 @@
         name: 'FooterPanel'
     }
 </script>
-
-<style scoped>
-    #footer {
-        position: relative;
-        padding: 10px;
-        background: #f0f0f0;
-        box-shadow: 0 0 4px silver;
-        z-index: 2;
-    }
-</style>
