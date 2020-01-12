@@ -1,5 +1,5 @@
 export default class KingdomClass {
     constructor () {
-        console.log(this)
+        console.log(this);
     }
 }

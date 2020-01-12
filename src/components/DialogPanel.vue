@@ -11,5 +11,5 @@
         props: {
             dialogData: Object
         }
-    }
+    };
 </script>

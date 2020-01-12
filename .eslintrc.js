@@ -17,8 +17,8 @@ module.exports = {
             alignAttributesVertically: true,
             ignores: []
         }],
-        'vue/script-indent': ['error', 4, { baseIndent: 1 }]
-
+        'vue/script-indent': ['error', 4, { baseIndent: 1 }],
+        semi: [2, 'always']
     },
     parserOptions: {
         parser: 'babel-eslint'

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import kingdomNames from '../assets/kingdom-names.json'
+    import kingdomNames from '../assets/kingdom-names.json';
 
     export default {
         name: 'Header',
@@ -17,16 +17,16 @@
         data () {
             return {
                 kingdomNames: kingdomNames
-            }
+            };
         },
         computed: {
             kingdomName: function () {
                 if (this.kingdom.live) {
-                    return kingdomNames[this.kingdom.code]
+                    return kingdomNames[this.kingdom.code];
                 } else {
-                    return ''
+                    return '';
                 }
             }
         }
-    }
+    };
 </script>

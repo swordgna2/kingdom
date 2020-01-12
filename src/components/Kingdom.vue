@@ -8,7 +8,7 @@
         data () {
             return {
                 live: false
-            }
+            };
         }
-    }
+    };
 </script>

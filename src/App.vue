@@ -18,11 +18,11 @@
 </template>
 
 <script>
-    import HeaderPanel from './components/HeaderPanel'
-    import StatisticsPanel from './components/StatisticsPanel'
-    import DialogPanel from './components/DialogPanel'
-    import FooterPanel from './components/FooterPanel'
-    import KingdomClass from './classes/KingdomClass'
+    import HeaderPanel from './components/HeaderPanel';
+    import StatisticsPanel from './components/StatisticsPanel';
+    import DialogPanel from './components/DialogPanel';
+    import FooterPanel from './components/FooterPanel';
+    import KingdomClass from './classes/KingdomClass';
 
     export default {
         name: 'app',
@@ -35,7 +35,7 @@
                 },
                 year: 1,
                 myKingdom: new KingdomClass()
-            }
+            };
         }
-    }
+    };
 </script>
