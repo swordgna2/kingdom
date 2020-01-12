@@ -1,31 +1,23 @@
 <template>
     <div class="main-header">
-        <span>Королевство {{ kingdomName }}</span>
-        <span>Год {{ year }}-й</span>
+        <span v-if="kingdom.code">Королевство {{ kingdomName }}</span>
+        <span v-if="reign.number">Год {{ reign.number }}-й</span>
     </div>
 </template>
 
 <script>
-    import kingdomNames from '../assets/kingdom-names.json';
+    import ReignClass from '../classes/ReignClass';
+    import KingdomClass from '../classes/KingdomClass';
 
     export default {
         name: 'Header',
         props: {
-            year: Number,
-            kingdom: Object
-        },
-        data () {
-            return {
-                kingdomNames: kingdomNames
-            };
+            reign: ReignClass,
+            kingdom: KingdomClass
         },
         computed: {
-            kingdomName: function () {
-                if (this.kingdom.live) {
-                    return kingdomNames[this.kingdom.code];
-                } else {
-                    return '';
-                }
+            kingdomName () {
+                return this.kingdom.getName();
             }
         }
     };
