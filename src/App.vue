@@ -7,6 +7,7 @@
         />
         <div class="main-container">
             <div class="main-container-inner">
+                <LogPanel/>
                 <DialogPanel
                     v-bind:dialog-data="dialogData"
                 />
@@ -23,10 +24,11 @@
     import DialogPanel from './components/DialogPanel';
     import FooterPanel from './components/FooterPanel';
     import KingdomClass from './classes/KingdomClass';
+    import LogPanel from './components/LogPanel';
 
     export default {
         name: 'app',
-        components: { FooterPanel, DialogPanel, StatisticsPanel, HeaderPanel },
+        components: { LogPanel, FooterPanel, DialogPanel, StatisticsPanel, HeaderPanel },
         data () {
             return {
                 dialogData: {

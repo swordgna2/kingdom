@@ -73,6 +73,21 @@ button:hover {
     display: flex;
 }
 
+.log-container {
+    position: relative;
+    background: #f7f7f7;
+    color: gray;
+    flex: 30% 0;
+    min-width: 300px;
+    height: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    overflow: auto;
+    box-shadow: 0 0 4px silver;
+    text-align: left;
+    user-select: none;
+}
+
 .dialog-container {
     position: relative;
     background: white;
@@ -104,4 +119,11 @@ button:hover {
     background: #f0f0f0;
     box-shadow: 0 0 4px silver;
     z-index: 2;
+}
+
+.list-item {
+    padding: 10px 0;
+}
+.list-item + .list-item {
+    border-top: 1px solid #eeeeee;
 }
