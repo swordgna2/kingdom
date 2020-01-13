@@ -1,14 +1,3 @@
-<script>
-    export default {
-        name: 'modal',
-        methods: {
-            close () {
-                this.$emit('close');
-            }
-        }
-    };
-</script>
-
 <template>
     <transition name="modal-fade">
         <div class="modal-backdrop">
@@ -21,17 +10,20 @@
                     class="modal-header"
                     id="modalTitle"
                 >
-                    <slot name="header">
+                    <slot name="header"
+                          v-bind:userText="changeText"
+                          v-bind:userText1="changeText1"
+                    >
                         This is the default tile!
-                        <button
-                            type="button"
-                            class="btn-close"
-                            @click="close"
-                            aria-label="Close modal"
-                        >
-                            x
-                        </button>
                     </slot>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        @click="close"
+                        aria-label="Close modal"
+                    >
+                        x
+                    </button>
                 </header>
                 <section
                     class="modal-body"
@@ -58,6 +50,31 @@
         </div>
     </transition>
 </template>
+
+<script>
+    export default {
+        name: 'modal',
+        props: {
+
+        },
+        data () {
+            return {
+                textM: 'QWE-'
+            };
+        },
+        methods: {
+            changeText (text) {
+                return text.split('').reverse().join();
+            },
+            changeText1 (text) {
+                return text.split('').reverse().join('-');
+            },
+            close () {
+                this.$emit('close');
+            }
+        }
+    };
+</script>
 
 <style>
     .modal-backdrop {

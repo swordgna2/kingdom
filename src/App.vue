@@ -23,7 +23,12 @@
                 <modal
                     v-show="isModalVisible"
                     @close="closeModal"
-                />
+                >
+                    <template v-slot:header="{ userText, userText1 }">
+                        {{ userText('Hello') }}
+                        {{ userText1('Hello') }}
+                    </template>
+                </modal>
             </div>
         </div>
         <FooterPanel/>
