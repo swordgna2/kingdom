@@ -8,9 +8,7 @@
         <div class="main-container">
             <div class="main-container-inner">
                 <LogPanel/>
-                <DialogPanel
-                    v-bind:dialog-data="dialogData"
-                />
+                <DialogPanel/>
                 <StatisticsPanel/>
                 <button
                     type="button"
@@ -26,7 +24,13 @@
                 >
                     <template v-slot:header="{ userText, userText1 }">
                         {{ userText('Hello') }}
-                        {{ userText1('Hello') }}
+                        {{ userText1('Hello1') }}
+                    </template>
+                    <template v-slot:body="{ bodyHtml }">
+                        {{ bodyHtml }}
+                    </template>
+                    <template v-slot:footer="{ footerHtml }">
+                        {{ footerHtml('footer HTML1') }}
                     </template>
                 </modal>
             </div>
@@ -50,10 +54,6 @@
         components: { HeaderPanel, LogPanel, DialogPanel, StatisticsPanel, Modal, FooterPanel },
         data () {
             return {
-                dialogData: {
-                    header: 'Название королевства',
-                    message: 'Выберите название Вашего королевства'
-                },
                 reign: new ReignClass(),
                 myKingdom: new KingdomClass(),
                 isModalVisible: false

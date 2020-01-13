@@ -1,15 +1,19 @@
 <template>
     <div class="dialog-container">
-        <div>{{ dialogData.header }}</div>
-        <div>{{ dialogData.message }}</div>
+        <SelectKingdom v-if="dialog === 'selectKingdom'"/>
     </div>
 </template>
 
 <script>
+    import SelectKingdom from './../dialogs/selectKingdom.vue';
+
     export default {
         name: 'DialogPanel',
-        props: {
-            dialogData: Object
+        components: { SelectKingdom },
+        data () {
+            return {
+                dialog: 'selectKingdom'
+            };
         }
     };
 </script>

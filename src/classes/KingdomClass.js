@@ -1,5 +1,5 @@
 import kingdomNames from '../assets/kingdom-names.json';
-import { randomHelper, getBooleanRandom } from '../helpers/randomHelper.js';
+import { getIntegerRandom, getBooleanRandom } from '../helpers/randomHelper.js';
 
 export default class KingdomClass {
     /**
@@ -44,29 +44,29 @@ export default class KingdomClass {
      */
     setKingdomDefaults () {
         this.geo = {
-            plain: randomHelper(1000, 2000),
-            woods: randomHelper(500, 1000),
-            mountains: randomHelper(500, 1000),
+            plain: getIntegerRandom(1000, 2000),
+            woods: getIntegerRandom(500, 1000),
+            mountains: getIntegerRandom(500, 1000),
             sea: getBooleanRandom()
         };
 
         this.people = {
-            peasants: randomHelper(100, 200),
-            workers: randomHelper(50, 100),
-            warriors: randomHelper(25, 50),
-            priests: randomHelper(10, 20)
+            peasants: getIntegerRandom(100, 200),
+            workers: getIntegerRandom(50, 100),
+            warriors: getIntegerRandom(25, 50),
+            priests: getIntegerRandom(10, 20)
         };
 
         this.stocks = {
-            money: randomHelper(1000, 2000),
-            gold: randomHelper(10, 20),
-            corn: this.geo.plain * randomHelper(5, 10),
-            wood: this.geo.woods * randomHelper(5, 10),
-            minerals: this.geo.mountains * randomHelper(5, 10)
+            money: getIntegerRandom(1000, 2000),
+            gold: getIntegerRandom(10, 20),
+            corn: this.geo.plain * getIntegerRandom(5, 10),
+            wood: this.geo.woods * getIntegerRandom(5, 10),
+            minerals: this.geo.mountains * getIntegerRandom(5, 10)
         };
 
         this.pendingEvents = {
-            seafaring: (this.geo.sea && Math.random() > 0.75) ? randomHelper(1, 3) : 0,
+            seafaring: (this.geo.sea && Math.random() > 0.75) ? getIntegerRandom(1, 3) : 0,
             wedding: 0,
             childBirth: 0
         };
@@ -89,7 +89,7 @@ export default class KingdomClass {
      * Добавить стране соседа.
      */
     addRandomNeighbor () {
-        const neighborCode = randomHelper(0, KingdomClass.kingdoms.length - 1);
+        const neighborCode = getIntegerRandom(0, KingdomClass.kingdoms.length - 1);
         if (this.neighbors.indexOf(neighborCode) === -1) {
             this.neighbors.push(neighborCode);
         }

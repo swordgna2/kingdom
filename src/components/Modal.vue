@@ -29,22 +29,26 @@
                     class="modal-body"
                     id="modalDescription"
                 >
-                    <slot name="body">
-                        I'm the default body!
+                    <slot name="body"
+                          v-bind:bodyHtml="bodyHtml"
+                    >
+                        body HTML
                     </slot>
                 </section>
                 <footer class="modal-footer">
-                    <slot name="footer">
+                    <slot name="footer"
+                          v-bind:footerHtml="changeText1"
+                    >
                         I'm the default footer!
-                        <button
-                            type="button"
-                            class="btn-green"
-                            @click="close"
-                            aria-label="Close modal"
-                        >
-                            Close me!
-                        </button>
                     </slot>
+                    <button
+                        type="button"
+                        class="btn-green"
+                        @click="close"
+                        aria-label="Close modal"
+                    >
+                        Close me!
+                    </button>
                 </footer>
             </div>
         </div>
@@ -59,7 +63,7 @@
         },
         data () {
             return {
-                textM: 'QWE-'
+                bodyHtml: 'body H T M L'
             };
         },
         methods: {
