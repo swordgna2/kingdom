@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            Начало игры
+            Начало игры 22222
         </header>
         <section>
             <p>Выберите страну, за которую играете:</p>
@@ -34,16 +34,6 @@
 
     export default {
         name: 'SelectKingdom',
-        props: {
-            qwe: {
-                type: Number,
-                default: 0
-            },
-            qwe2: {
-                type: String,
-                default: '0'
-            }
-        },
         data () {
             return {
                 selected: undefined,
@@ -54,15 +44,6 @@
             flushKingdom () {
                 this.selected = getIntegerRandom(0, Object.values(KingdomClass.names).length);
             }
-        },
-        created () {
-            console.log(this.qwe);
-            console.log(this.qwe2);
-            setTimeout(() => {
-                this.$emit('done', {
-                    selectedKingdom: this.selected
-                });
-            }, 5000);
         }
     };
 </script>
