@@ -6,8 +6,8 @@
 </template>
 
 <script>
-    import ReignClass from '../classes/ReignClass';
-    import KingdomClass from '../classes/KingdomClass';
+    import ReignClass from './../classes/ReignClass';
+    import KingdomClass from './../classes/KingdomClass';
 
     export default {
         name: 'Header',

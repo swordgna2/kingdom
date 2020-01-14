@@ -5,25 +5,42 @@
 </template>
 
 <script>
+    import KingdomClass from '../classes/KingdomClass';
+
     const components = {
-        SelectKingdom: () => import('./../dialogs/selectKingdom.vue'),
-        SelectKingdom2: () => import('./../dialogs/selectKingdom2.vue')
+        StartDialog: () => import('../dialogs/startDialog.vue'),
+        DistributeWorkers: () => import('../dialogs/distributeWorkers.vue')
     };
 
     export default {
         name: 'DialogPanel',
         components,
+        props: {
+            reignProp: Object,
+            kingdomProp: Object
+        },
         data () {
             return {
-                dialog: 'selectKingdom',
-                componentName: 'select-kingdom',
-                componentOptions: { qwe: 1, qwe2: 'qwe' }
+                reign: this.reignProp,
+                myKingdom: this.kingdomProp,
+                componentName: 'start-dialog',
+                componentOptions: {}
             };
         },
+        created () {
+            this.reign.dialogComponent = this;
+        },
         methods: {
-            doneListener (e) {
-                console.log(e);
-                this.componentName = 'select-kingdom2';
+            doneListener (options) {
+                if (this.componentName === 'start-dialog') {
+                    this.startGameWithOptions(options);
+                }
+            },
+            startGameWithOptions (options) {
+                this.myKingdom = KingdomClass.kingdoms[options.selectedKingdom];
+                this.reign.difficulty = options.selectedDifficulty;
+                this.reign.myKingdom = this.myKingdom;
+                this.reign.startNewYear();
             }
         }
     };

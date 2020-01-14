@@ -8,16 +8,18 @@
         <div class="main-container">
             <div class="main-container-inner">
                 <LogPanel/>
-                <DialogPanel/>
+                <DialogPanel
+                    v-bind:reign-prop="reign"
+                    v-bind:kingdom-prop="myKingdom"
+                />
                 <StatisticsPanel/>
-                <button
+                <!--<button
                     type="button"
                     class="btn"
                     @click="showModal"
                 >
                     Open Modal!
                 </button>
-
                 <modal
                     v-show="isModalVisible"
                     @close="closeModal"
@@ -32,7 +34,7 @@
                     <template v-slot:footer="{ footerHtml }">
                         {{ footerHtml('footer HTML1') }}
                     </template>
-                </modal>
+                </modal>-->
             </div>
         </div>
         <FooterPanel/>
@@ -44,28 +46,19 @@
     import LogPanel from './components/LogPanel';
     import DialogPanel from './components/DialogPanel';
     import StatisticsPanel from './components/StatisticsPanel';
-    import Modal from './components/Modal';
     import FooterPanel from './components/FooterPanel';
     import ReignClass from './classes/ReignClass';
     import KingdomClass from './classes/KingdomClass';
 
     export default {
         name: 'app',
-        components: { HeaderPanel, LogPanel, DialogPanel, StatisticsPanel, Modal, FooterPanel },
+        components: { HeaderPanel, LogPanel, DialogPanel, StatisticsPanel, FooterPanel },
         data () {
             return {
                 reign: new ReignClass(),
                 myKingdom: new KingdomClass(),
                 isModalVisible: false
             };
-        },
-        methods: {
-            showModal () {
-                this.isModalVisible = true;
-            },
-            closeModal () {
-                this.isModalVisible = false;
-            }
         },
         created () {
             this.myKingdom.autoSetKingdoms();
