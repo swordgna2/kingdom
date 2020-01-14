@@ -27,6 +27,12 @@
                 componentOptions: {}
             };
         },
+        watch: {
+            // todo: не получается передать в App год (reign.number)
+            myKingdom (myKingdom) {
+                this.$emit('update-my-kingdom', myKingdom);
+            }
+        },
         created () {
             this.reign.dialogComponent = this;
         },

@@ -2,7 +2,7 @@
     <div class="main-wrapper">
         <!--<p>Have a crown: <font-awesome-icon icon="crown"/></p>-->
         <HeaderPanel
-            v-bind:reign="reign"
+            v-bind:year="reign.number"
             v-bind:kingdom="myKingdom"
         />
         <div class="main-container">
@@ -11,6 +11,7 @@
                 <DialogPanel
                     v-bind:reign-prop="reign"
                     v-bind:kingdom-prop="myKingdom"
+                    @update-my-kingdom="updateMyKingdom"
                 />
                 <StatisticsPanel/>
                 <!--<button
@@ -62,6 +63,11 @@
         },
         created () {
             this.myKingdom.autoSetKingdoms();
+        },
+        methods: {
+            updateMyKingdom (myKingdom) {
+                this.myKingdom = myKingdom;
+            }
         }
     };
 </script>

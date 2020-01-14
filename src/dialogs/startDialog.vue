@@ -4,22 +4,31 @@
             Начало игры
         </header>
         <section class="dialog-section">
-            <p>Выберите королевство, за которую играете:</p>
-            <p><label>
-                <select v-if="kingdomOptions" v-model="selectedKingdom">
-                    <option v-for="(option, index) in kingdomOptions" :key="index" :value="index">
-                        {{ option }}
-                    </option>
-                </select>
-            </label>&nbsp;<button name="random" @click="flushKingdom">случайное</button></p>
-            <p>Выберите сложность:</p>
-            <p><label>
-                <select v-model="selectedDifficulty">
-                    <option v-for="(option, index) in difficultyOptions" :key="index" :value="index">
-                        {{ option }}
-                    </option>
-                </select>
-            </label></p>
+            <div class="list-item">
+                <p><font-awesome-icon icon="globe-europe"/>&nbsp;Выберите королевство, за которое играете:</p>
+                <p>
+                    <label>
+                        <select v-if="kingdomOptions" v-model="selectedKingdom">
+                            <option v-for="(option, index) in kingdomOptions" :key="index" :value="index">
+                                {{ option }}
+                            </option>
+                        </select>
+                    </label>
+                    &nbsp;<button name="random" @click="flushKingdom"><font-awesome-icon icon="random"/>&nbsp;случайное</button>
+                </p>
+            </div>
+            <div class="list-item">
+                <p><font-awesome-icon icon="graduation-cap"/>&nbsp;Выберите сложность:</p>
+                <p>
+                    <label>
+                        <select v-model="selectedDifficulty">
+                            <option v-for="(option, index) in difficultyOptions" :key="index" :value="index">
+                                {{ option }}
+                            </option>
+                        </select>
+                    </label>
+                </p>
+            </div>
         </section>
         <footer class="dialog-footer">
             <button name="proceed" @click="proceed">Продолжить</button>

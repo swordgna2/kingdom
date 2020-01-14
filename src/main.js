@@ -3,10 +3,10 @@ import Vue from 'vue';
 import App from './App.vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCrown } from '@fortawesome/free-solid-svg-icons';
+import { faCrown, faGlobeEurope, faGraduationCap, faRandom } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faCrown);
+library.add(faCrown, faGlobeEurope, faGraduationCap, faRandom);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
