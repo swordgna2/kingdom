@@ -1,17 +1,14 @@
 <template>
     <div class="main-wrapper">
-        <!--<p>Have a crown: <font-awesome-icon icon="crown"/></p>-->
         <HeaderPanel
-            v-bind:year="reign.number"
             v-bind:kingdom="myKingdom"
         />
         <div class="main-container">
             <div class="main-container-inner">
                 <LogPanel/>
                 <DialogPanel
-                    v-bind:reign-prop="reign"
-                    v-bind:kingdom-prop="myKingdom"
-                    @update-my-kingdom="updateMyKingdom"
+                    :my-kingdom="computedKingdom"
+                    @set-kingdom-with-code="setKingdomWithCode"
                 />
                 <StatisticsPanel/>
                 <!--<button
@@ -43,12 +40,12 @@
 </template>
 
 <script>
+    import Vue from 'vue';
     import HeaderPanel from './components/HeaderPanel';
     import LogPanel from './components/LogPanel';
     import DialogPanel from './components/DialogPanel';
     import StatisticsPanel from './components/StatisticsPanel';
     import FooterPanel from './components/FooterPanel';
-    import ReignClass from './classes/ReignClass';
     import KingdomClass from './classes/KingdomClass';
 
     export default {
@@ -56,17 +53,26 @@
         components: { HeaderPanel, LogPanel, DialogPanel, StatisticsPanel, FooterPanel },
         data () {
             return {
-                reign: new ReignClass(),
                 myKingdom: new KingdomClass(),
                 isModalVisible: false
             };
         },
+        computed: {
+            computedKingdom: function () {
+                return this.myKingdom;
+            }
+        },
         created () {
-            this.myKingdom.autoSetKingdoms();
+            KingdomClass.autoSetKingdoms();
         },
         methods: {
-            updateMyKingdom (myKingdom) {
-                this.myKingdom = myKingdom;
+            setKingdomWithCode (kingdomCode) {
+                const kingdom = KingdomClass.kingdoms[kingdomCode];
+                const kingdomClassKeys = Object.keys(kingdom);
+                for (let i = 0; i < kingdomClassKeys.length; i++) {
+                    const key = kingdomClassKeys[i];
+                    Vue.set(this.myKingdom, key, kingdom[key]);
+                }
             }
         }
     };

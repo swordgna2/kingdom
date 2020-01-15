@@ -3,19 +3,33 @@ import { getIntegerRandom, getBooleanRandom } from './../helpers/randomHelper.js
 
 export default class KingdomClass {
     /**
-     * Страны.
+     * Королевства.
+     * @type {Array}
      */
     static kingdoms = [];
 
     /**
+     * Код королевства.
+     * @type {Number}
+     */
+    code = null;
+
+    /**
      * Соседи.
+     * @type {Array}
      */
     neighbors = [];
 
     /**
+     * Год
+     * @type {number}
+     */
+    year = 0;
+
+    /**
      * Автоматически создать все страны.
      */
-    autoSetKingdoms () {
+    static autoSetKingdoms () {
         const kingdomsCount = Object.values(KingdomClass.names).length;
         for (let i = 0; i < kingdomsCount; i++) {
             const newKingdom = new KingdomClass();
@@ -106,4 +120,12 @@ export default class KingdomClass {
     getName () {
         return KingdomClass.names[this.code];
     };
+
+    /**
+     * Начать новый год.
+     */
+    startNewYear () {
+        this.year++;
+        console.log('startNewYear');
+    }
 }

@@ -1,12 +1,11 @@
 <template>
     <div class="dialog-container">
+        {{ myKingdom.code }}
         <component :is="componentName" @done="doneListener" v-bind="componentOptions"/>
     </div>
 </template>
 
 <script>
-    import KingdomClass from '../classes/KingdomClass';
-
     const components = {
         StartDialog: () => import('../dialogs/startDialog.vue'),
         DistributeWorkers: () => import('../dialogs/distributeWorkers.vue')
@@ -16,25 +15,18 @@
         name: 'DialogPanel',
         components,
         props: {
-            reignProp: Object,
-            kingdomProp: Object
+            myKingdom: Object
+        },
+        $watch: {
+            myKingdom: function (val) {
+                console.log(val);
+            }
         },
         data () {
             return {
-                reign: this.reignProp,
-                myKingdom: this.kingdomProp,
                 componentName: 'start-dialog',
                 componentOptions: {}
             };
-        },
-        watch: {
-            // todo: не получается передать в App год (reign.number)
-            myKingdom (myKingdom) {
-                this.$emit('update-my-kingdom', myKingdom);
-            }
-        },
-        created () {
-            this.reign.dialogComponent = this;
         },
         methods: {
             doneListener (options) {
@@ -43,10 +35,10 @@
                 }
             },
             startGameWithOptions (options) {
-                this.myKingdom = KingdomClass.kingdoms[options.selectedKingdom];
-                this.reign.difficulty = options.selectedDifficulty;
-                this.reign.myKingdom = this.myKingdom;
-                this.reign.startNewYear();
+                this.$emit('set-kingdom-with-code', options.selectedKingdom);
+                this.myKingdom.difficulty = options.selectedDifficulty;
+                this.myKingdom.startNewYear();
+                this.componentName = 'distribute-workers';
             }
         }
     };
