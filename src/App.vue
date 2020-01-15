@@ -5,10 +5,11 @@
         />
         <div class="main-container">
             <div class="main-container-inner">
-                <LogPanel/>
+                <LogPanel ref="log"/>
                 <DialogPanel
                     :my-kingdom="computedKingdom"
                     @set-kingdom-with-code="setKingdomWithCode"
+                    @log="log"
                 />
                 <StatisticsPanel/>
                 <!--<button
@@ -73,6 +74,9 @@
                     const key = kingdomClassKeys[i];
                     Vue.set(this.myKingdom, key, kingdom[key]);
                 }
+            },
+            log (message) {
+                this.$refs.log.addMessage(message);
             }
         }
     };

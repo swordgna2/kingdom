@@ -1,6 +1,5 @@
 <template>
     <div class="dialog-container">
-        {{ myKingdom.code }}
         <component :is="componentName" @done="doneListener" v-bind="componentOptions"/>
     </div>
 </template>
@@ -37,7 +36,11 @@
             startGameWithOptions (options) {
                 this.$emit('set-kingdom-with-code', options.selectedKingdom);
                 this.myKingdom.difficulty = options.selectedDifficulty;
+                this.startNewYear();
+            },
+            startNewYear () {
                 this.myKingdom.startNewYear();
+                this.$emit('log', 'Начат новый, ' + this.myKingdom.year + '-й год правления.');
                 this.componentName = 'distribute-workers';
             }
         }

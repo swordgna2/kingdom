@@ -15,9 +15,14 @@
         data () {
             return {
                 log: [
-                    'Начата игра'
+                    'Добро пожаловать!'
                 ]
             };
+        },
+        methods: {
+            addMessage (message) {
+                this.log.push(message);
+            }
         }
     };
 </script>

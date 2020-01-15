@@ -4,24 +4,28 @@ import { getIntegerRandom, getBooleanRandom } from './../helpers/randomHelper.js
 export default class KingdomClass {
     /**
      * Королевства.
+     *
      * @type {Array}
      */
     static kingdoms = [];
 
     /**
      * Код королевства.
+     *
      * @type {Number}
      */
     code = null;
 
     /**
      * Соседи.
+     *
      * @type {Array}
      */
     neighbors = [];
 
     /**
-     * Год
+     * Год.
+     *
      * @type {number}
      */
     year = 0;
@@ -126,6 +130,6 @@ export default class KingdomClass {
      */
     startNewYear () {
         this.year++;
-        console.log('startNewYear');
+        console.log('startNewYear', 'На этом моменте сбрасываются данные с прошлого года и добавляются новые параметры для текущего года.');
     }
 }
