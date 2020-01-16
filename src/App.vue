@@ -1,7 +1,8 @@
 <template>
     <div class="main-wrapper">
         <HeaderPanel
-            v-bind:kingdom="myKingdom"
+            v-if="myKingdom.year"
+            :my-kingdom="myKingdom"
         />
         <div class="main-container">
             <div class="main-container-inner">
@@ -11,7 +12,9 @@
                     @set-kingdom-with-code="setKingdomWithCode"
                     @log="log"
                 />
-                <StatisticsPanel/>
+                <StatisticsPanel
+                    :my-kingdom="myKingdom"
+                />
                 <!--<button
                     type="button"
                     class="btn"
@@ -51,7 +54,13 @@
 
     export default {
         name: 'app',
-        components: { HeaderPanel, LogPanel, DialogPanel, StatisticsPanel, FooterPanel },
+        components: {
+            HeaderPanel,
+            LogPanel,
+            DialogPanel,
+            StatisticsPanel,
+            FooterPanel
+        },
         data () {
             return {
                 myKingdom: new KingdomClass(),

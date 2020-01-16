@@ -1,7 +1,7 @@
 <template>
     <div class="main-header">
-        <span v-if="kingdom.code">Королевство {{ kingdomName }}</span>
-        <span v-if="kingdom.year">Год {{ kingdom.year }}-й</span>
+        <span v-if="myKingdom.code">Королевство {{ kingdomName }}</span>
+        <span v-if="myKingdom.year">Год {{ myKingdom.year }}-й</span>
     </div>
 </template>
 
@@ -10,11 +10,11 @@
         name: 'Header',
         props: {
             year: Number,
-            kingdom: Object
+            myKingdom: Object
         },
         computed: {
             kingdomName () {
-                return this.kingdom.getName();
+                return this.myKingdom.getName();
             }
         }
     };

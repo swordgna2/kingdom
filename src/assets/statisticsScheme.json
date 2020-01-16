@@ -1,0 +1,95 @@
+{
+  "geo": {
+    "caption": "География",
+    "dimension": "га",
+    "sub": {
+      "plain": "Равнины",
+      "woods": "Леса",
+      "mountains": "Горы",
+      "sea": {
+        "caption": "Выход к морю",
+        "type": "Boolean"
+      }
+    }
+  },
+  "people": {
+    "caption": "Население",
+    "dimension": "чел",
+    "sub": {
+      "peasants": "Крестьяне",
+      "workers": "Рабочие",
+      "warriors": "Воины",
+      "priests": "Священники"
+    },
+    "help": "not-ready"
+  },
+  "stocks": {
+    "caption": "Запасы",
+    "sub": {
+      "money": {
+        "caption": "Деньги",
+        "dimension": "у.е."
+      },
+      "gold": {
+        "caption": "Золото",
+        "dimension": "кг"
+      },
+      "corn": {
+        "caption": "Зерно",
+        "dimension": "тонн"
+      },
+      "wood": {
+        "caption": "Лес",
+        "dimension": "кубов"
+      },
+      "minerals": {
+        "caption": "Полезные ископаемые",
+        "dimension": "тонн"
+      }
+    }
+  },
+  "mood": {
+    "caption": "Довольство",
+    "dimension": "%",
+    "sub": {
+      "peasants": {
+        "caption": "Крестьяне",
+        "type": "kToPercent",
+        "colored": true
+      },
+      "workers": {
+        "caption": "Рабочие",
+        "type": "kToPercent",
+        "colored": true
+      },
+      "warriors": {
+        "caption": "Воины",
+        "type": "kToPercent",
+        "colored": true
+      },
+      "priests": {
+        "caption": "Священники",
+        "type": "kToPercent",
+        "colored": true
+      }
+    },
+    "help": "about-mood"
+  },
+  "family": {
+    "caption": "Семья",
+    "sub": {
+      "wife": {
+        "caption": "Жена",
+        "type": "Boolean"
+      },
+      "son": {
+        "caption": "Сын",
+        "type": "Boolean"
+      },
+      "daughter": {
+        "caption": "Дочь",
+        "type": "Boolean"
+      }
+    }
+  }
+}

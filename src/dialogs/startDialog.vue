@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import kingdomNames from './../assets/kingdom-names.json';
+    import kingdomNames from '../assets/kingdomNames.json';
     import KingdomClass from './../classes/KingdomClass';
     import { getIntegerRandom } from './../helpers/randomHelper.js';
 
