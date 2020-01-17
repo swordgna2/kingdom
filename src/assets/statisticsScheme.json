@@ -50,45 +50,27 @@
   },
   "mood": {
     "caption": "Довольство",
-    "dimension": "%",
+    "type": "kToPercent",
     "sub": {
-      "peasants": {
-        "caption": "Крестьяне",
-        "type": "kToPercent",
-        "colored": true
-      },
-      "workers": {
-        "caption": "Рабочие",
-        "type": "kToPercent",
-        "colored": true
-      },
-      "warriors": {
-        "caption": "Воины",
-        "type": "kToPercent",
-        "colored": true
-      },
-      "priests": {
-        "caption": "Священники",
-        "type": "kToPercent",
-        "colored": true
-      }
+      "peasants": "Крестьяне",
+      "workers": "Рабочие",
+      "warriors": "Воины",
+      "priests": "Священники"
     },
     "help": "about-mood"
   },
   "family": {
     "caption": "Семья",
+    "type": "Boolean",
     "sub": {
       "wife": {
-        "caption": "Жена",
-        "type": "Boolean"
+        "caption": "Жена"
       },
       "son": {
-        "caption": "Сын",
-        "type": "Boolean"
+        "caption": "Сын"
       },
       "daughter": {
-        "caption": "Дочь",
-        "type": "Boolean"
+        "caption": "Дочь"
       }
     }
   }

@@ -1,13 +1,29 @@
 <template>
     <div class="statistics-container" v-if="myKingdom.year">
-        <span>Статистика</span>
-        <div class="group" v-for="(group, groupIndex) in statisticsScheme" :key="groupIndex">
-            <div class="group-caption"><font-awesome-icon icon="plus" v-if="group.collapsed"/><font-awesome-icon icon="minus" v-else/>&nbsp;{{ group.caption }}</div>
-            <div class="group-data">
-                <div class="list-row" v-for="(item, itemIndex) in group.sub" :key="itemIndex">
-                    <div class="list-caption">{{ getItemName(item) }}</div>
-                    <div class="list-value">{{ translateValueWithItemSettings(groupIndex, itemIndex, item) }}</div>
-                    <div class="list-dimension">{{ getItemDimension(item, group) }}</div>
+        <div class="statistics-group" v-for="(group, groupIndex) in statisticsScheme" :key="groupIndex">
+            <div class="statistics-group-caption" @click="toggleGroup(groupIndex)">
+                <font-awesome-icon icon="plus" v-if="groupsCollapsed[groupIndex]"/>
+                <font-awesome-icon icon="minus" v-else/>
+                &nbsp;{{ group.caption }}
+            </div>
+            <div class="statistics-group-data" v-if="!groupsCollapsed[groupIndex]">
+                <div class="statistics-list-row" v-for="(item, itemIndex) in group.sub" :key="itemIndex">
+                    <div class="statistics-list-caption">{{ getItemName(item) }}</div>
+                    <div class="statistics-list-value">
+                        <span v-if="getItemType(item, group) === 'Boolean'">
+                            <span v-if="myKingdom[groupIndex][itemIndex]"><font-awesome-icon icon="check-square"/>&nbsp;да</span>
+                            <span v-else><font-awesome-icon icon="times-circle"/>&nbsp;нет</span>
+                        </span>
+                        <span v-else-if="getItemType(item, group) === 'kToPercent'">
+                            <font-awesome-icon icon="exclamation-triangle" class="bad-condition" v-if="myKingdom[groupIndex][itemIndex] < 0.333"/>
+                            <font-awesome-icon icon="check-square" class="good-condition" v-else-if="myKingdom[groupIndex][itemIndex] > 0.667"/>
+                            {{ convertKToPercent(myKingdom[groupIndex][itemIndex]) }}
+                        </span>
+                        <span v-else>
+                            {{ myKingdom[groupIndex][itemIndex] }}
+                        </span>
+                    </div>
+                    <div class="statistics-list-dimension">{{ getItemDimension(item, group) }}</div>
                 </div>
             </div>
         </div>
@@ -25,23 +41,34 @@
         },
         data () {
             return {
-                statisticsScheme: statisticsScheme
+                statisticsScheme: statisticsScheme,
+                groupsCollapsed: {}
             };
         },
-        created () {
-            console.log(this.myKingdom);
-        },
         methods: {
+            toggleGroup (groupIndex) {
+                this.$set(this.groupsCollapsed, groupIndex, !this.groupsCollapsed[groupIndex]);
+            },
             getItemName (item) {
                 return typeof item === 'object' ? item.caption : item;
             },
-            translateValueWithItemSettings (groupIndex, itemIndex, itemParameters) {
-                const returnValue = this.myKingdom[groupIndex][itemIndex] + '!'; // value + '!';
-                console.log(itemParameters, groupIndex, itemIndex, returnValue);
-                return returnValue;
+            getItemType (item, group) {
+                return (typeof item === 'object' && item !== null) ? item.type || group.type : group.type;
+            },
+            convertKToPercent (k, precision) {
+                k = isNaN(k) ? 0 : k;
+                precision = isNaN(precision) ? 0 : precision.toFixed(0);
+                return (k * 100).toFixed(precision);
             },
             getItemDimension (item, group) {
-                return (typeof item === 'object' ? item.dimension : '') || group.dimension;
+                const type = (typeof item === 'object' && item !== null) ? item.type || group.type : group.type;
+                if (type === 'Boolean') {
+                    return '';
+                }
+                if (type === 'kToPercent') {
+                    return '%';
+                }
+                return (typeof item === 'object' && item !== null) ? item.dimension || group.dimension : group.dimension;
             }
         }
     };
