@@ -1,5 +1,5 @@
 <template>
-    <font-awesome-icon icon="info-circle" @click.stop="openModal"/>
+    <font-awesome-icon icon="info-circle" @click.stop="openModal" :title="modalData.header"/>
 </template>
 
 <script>
@@ -10,9 +10,14 @@
         props: {
             code: undefined
         },
+        data () {
+            return {
+                modalData: ModalData[this.code] || {}
+            };
+        },
         methods: {
             openModal () {
-                this.$emit('openModal', ModalData[this.code]);
+                this.$emit('openModal', this.modalData);
             }
         }
     };

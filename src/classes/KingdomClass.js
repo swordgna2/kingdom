@@ -125,6 +125,19 @@ export default class KingdomClass {
         return KingdomClass.names[this.code];
     };
 
+    getHtmlWithNeighborsList () {
+        const list = [];
+        for (let i = 0; i < this.neighbors.length; i++) {
+            const neighbor = KingdomClass.kingdoms[this.neighbors[i]];
+            // let mood = functions.average(neighbor.mood);
+            // mood = functions.convertKToPercent(mood, 0);
+            // mood = functions.colorPercentValue(mood);
+            const mood = 50;
+            list.push('<div class="list-item">' + neighbor.getName() + '&nbsp;&rarr;&nbsp;' + mood + '&nbsp;%' + '</div>');
+        }
+        return list.join('');
+    };
+
     /**
      * Начать новый год.
      */

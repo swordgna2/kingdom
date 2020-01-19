@@ -4,6 +4,7 @@
             <HeaderPanel
                 v-if="myKingdom.year"
                 :my-kingdom="myKingdom"
+                @openModal="openModal"
             />
             <div class="main-container">
                 <div class="main-container-inner">

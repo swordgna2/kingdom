@@ -11,6 +11,10 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+    overflow: inherit !important;
+}
+
 input, button, select {
     border: none;
     font: inherit;

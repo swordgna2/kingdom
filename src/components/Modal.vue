@@ -6,10 +6,11 @@
                     <span v-html="header"/>
                     <v-spacer/>
                     <font-awesome-icon icon="exclamation-triangle" v-if="type === 'alert'"/>
+                    <help-icon v-if="help" :code="help" @openModal="openModal"/>
                 </v-card-title>
                 <v-card-text/>
-                <v-card-text class="subtitle-1" v-html="body">
-                </v-card-text>
+                <component :is="componentName" v-bind="componentData"/>
+                <v-card-text class="subtitle-1" v-html="body" v-if="body"/>
                 <v-divider/>
                 <v-card-actions>
                     <v-spacer/>
@@ -24,9 +25,16 @@
 
 <script>
     import Vuetify from 'vuetify/lib';
+    import HelpIcon from './HelpIcon';
+
+    const components = {
+        // DistributeWorkers: () => import('../dialogs/distributeWorkers.vue')
+        HelpIcon
+    };
 
     export default {
         name: 'Modal',
+        components,
         vuetify: new Vuetify(),
         data () {
             return {
@@ -35,6 +43,9 @@
                 titleColorClass: 'grey',
                 header: '',
                 type: 'default',
+                help: '',
+                componentName: '',
+                componentData: {},
                 body: '',
                 btnColorProperty: 'primary'
             };
@@ -44,8 +55,10 @@
                 this.reset();
                 this.setWidth(data.width);
                 this.setHeader(data.header);
-                this.setBody(data.body);
                 this.setType(data.type);
+                this.setHelp(data.help);
+                this.setComponent(data);
+                this.setBody(data.body);
                 this.showModal();
             },
             reset () {
@@ -54,6 +67,7 @@
                 this.titleColorClass = 'grey';
                 this.header = '';
                 this.type = 'default';
+                this.help = '';
                 this.body = '';
                 this.btnColorProperty = 'primary';
             },
@@ -74,13 +88,6 @@
                     this.header = headerData;
                 }
             },
-            setBody (bodyData) {
-                if (typeof bodyData === 'object' && bodyData !== null) {
-                    this.body = Object.values(bodyData).join('');
-                } else {
-                    this.body = bodyData;
-                }
-            },
             setType (typeData) {
                 if (typeData) {
                     this.type = typeData;
@@ -91,6 +98,28 @@
                     }
                 } else {
                     this.type = 'dedault';
+                }
+            },
+            setHelp (helpData) {
+                if (helpData) {
+                    this.help = helpData;
+                } else {
+                    this.help = '';
+                }
+            },
+            setComponent (data) {
+                if (typeof data.component === 'string') {
+                    this.componentData = data;
+                    this.componentName = data.component;
+                } else {
+                    this.componentName = '';
+                }
+            },
+            setBody (bodyData) {
+                if (typeof bodyData === 'object' && bodyData !== null) {
+                    this.body = Object.values(bodyData).join('');
+                } else {
+                    this.body = bodyData;
                 }
             },
             showModal () {
