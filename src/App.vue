@@ -52,7 +52,7 @@
             return {
                 myKingdom: new KingdomClass(),
                 isModalVisible: false,
-                dialog: false
+                show: false
             };
         },
         computed: {

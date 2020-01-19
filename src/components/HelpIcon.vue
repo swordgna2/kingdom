@@ -3,6 +3,8 @@
 </template>
 
 <script>
+    import ModalData from '../assets/modalData';
+
     export default {
         name: 'HelpIcon',
         props: {
@@ -10,10 +12,7 @@
         },
         methods: {
             openModal () {
-                this.$emit('openModal', {
-                    header: this.code,
-                    body: this.code
-                });
+                this.$emit('openModal', ModalData[this.code]);
             }
         }
     };

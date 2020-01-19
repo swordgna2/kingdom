@@ -1,7 +1,7 @@
 <template>
     <div class="main-header">
-        <span v-if="myKingdom.code">Королевство {{ kingdomName }}</span>
-        <span v-if="myKingdom.year">Год {{ myKingdom.year }}-й</span>
+        <span v-if="myKingdom.code >= 0">Королевство {{ kingdomName }}</span>
+        <span v-if="myKingdom.year >= 0">Год {{ myKingdom.year }}-й</span>
     </div>
 </template>
 

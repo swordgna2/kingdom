@@ -9,6 +9,7 @@
                 <p>
                     <label>
                         <select v-if="kingdomOptions" v-model="selectedKingdom">
+                            <option value="">Выберите королевство</option>
                             <option v-for="(option, index) in kingdomOptions" :key="index" :value="index">
                                 {{ option }}
                             </option>
@@ -37,15 +38,15 @@
 </template>
 
 <script>
-    import kingdomNames from '../assets/kingdomNames.json';
+    import kingdomNames from './../assets/kingdomNames';
     import KingdomClass from './../classes/KingdomClass';
-    import { getIntegerRandom } from './../helpers/randomHelper.js';
+    import { getIntegerRandom } from './../helpers/randomHelper';
 
     export default {
         name: 'StartDialog',
         data () {
             return {
-                selectedKingdom: undefined,
+                selectedKingdom: '',
                 kingdomOptions: kingdomNames,
                 selectedDifficulty: 'normal',
                 difficultyOptions: {
@@ -60,7 +61,7 @@
                 this.selectedKingdom = getIntegerRandom(0, Object.values(KingdomClass.names).length);
             },
             proceed () {
-                if (this.selectedKingdom) {
+                if (this.selectedKingdom !== '') {
                     this.$emit('done', {
                         selectedKingdom: this.selectedKingdom,
                         selectedDifficulty: this.selectedDifficulty

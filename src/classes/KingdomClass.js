@@ -1,5 +1,5 @@
-import kingdomNames from '../assets/kingdomNames.json';
-import { getIntegerRandom, getBooleanRandom } from './../helpers/randomHelper.js';
+import kingdomNames from '../assets/kingdomNames';
+import { getIntegerRandom, getBooleanRandom } from './../helpers/randomHelper';
 
 export default class KingdomClass {
     /**
