@@ -1,6 +1,6 @@
 <template>
     <div class="dialog-container">
-        <component :is="componentName" @done="doneListener" v-bind="componentOptions"/>
+        <component :is="componentName" @openModal="openModal" @done="doneListener" v-bind="componentOptions"/>
     </div>
 </template>
 
@@ -28,6 +28,9 @@
             };
         },
         methods: {
+            openModal (data) {
+                this.$emit('openModal', data);
+            },
             doneListener (options) {
                 if (this.componentName === 'start-dialog') {
                     this.startGameWithOptions(options);

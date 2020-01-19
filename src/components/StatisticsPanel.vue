@@ -5,7 +5,7 @@
                 <font-awesome-icon icon="plus" v-if="groupsCollapsed[groupIndex]"/>
                 <font-awesome-icon icon="minus" v-else/>
                 &nbsp;{{ group.caption }}
-                <help v-if="group.help" :code="group.help" @openModal="openModal"/>
+                <help-icon v-if="group.help" :code="group.help" @openModal="openModal"/>
             </div>
             <div class="statistics-group-data" v-if="!groupsCollapsed[groupIndex]">
                 <div class="statistics-list-row" v-for="(item, itemIndex) in group.sub" :key="itemIndex">
@@ -34,12 +34,12 @@
 <script>
     import statisticsScheme from '../assets/statisticsScheme.json';
     import KingdomClass from '../classes/KingdomClass';
-    import Help from './Help';
+    import HelpIcon from './HelpIcon';
 
     export default {
         name: 'StatisticsPanel',
         components: {
-            Help
+            HelpIcon
         },
         props: {
             myKingdom: KingdomClass

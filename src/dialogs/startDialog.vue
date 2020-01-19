@@ -66,7 +66,10 @@
                         selectedDifficulty: this.selectedDifficulty
                     });
                 } else {
-                    alert('Выберите королевство, за которое играете.');
+                    this.$emit('openModal', {
+                        type: 'alert',
+                        body: 'Выберите королевство, за которое играете.'
+                    });
                 }
             }
         }

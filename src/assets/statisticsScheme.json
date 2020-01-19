@@ -63,15 +63,9 @@
     "caption": "Семья",
     "type": "Boolean",
     "sub": {
-      "wife": {
-        "caption": "Жена"
-      },
-      "son": {
-        "caption": "Сын"
-      },
-      "daughter": {
-        "caption": "Дочь"
-      }
+      "wife": "Жена",
+      "son": "Сын",
+      "daughter": "Дочь"
     }
   }
 }

@@ -4,13 +4,14 @@
 
 <script>
     export default {
-        name: 'Help',
+        name: 'HelpIcon',
         props: {
             code: undefined
         },
         methods: {
             openModal () {
                 this.$emit('openModal', {
+                    header: this.code,
                     body: this.code
                 });
             }

@@ -12,6 +12,7 @@
                         :my-kingdom="computedKingdom"
                         @set-kingdom-with-code="setKingdomWithCode"
                         @log="log"
+                        @openModal="openModal"
                     />
                     <StatisticsPanel
                         :my-kingdom="myKingdom"
