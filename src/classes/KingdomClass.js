@@ -1,5 +1,6 @@
 import kingdomNames from '../assets/kingdomNames';
 import { getIntegerRandom, getBooleanRandom } from './../helpers/randomHelper';
+import { average, convertKToPercent } from './../helpers/convertHelper';
 
 export default class KingdomClass {
     /**
@@ -129,10 +130,8 @@ export default class KingdomClass {
         const list = [];
         for (let i = 0; i < this.neighbors.length; i++) {
             const neighbor = KingdomClass.kingdoms[this.neighbors[i]];
-            // let mood = functions.average(neighbor.mood);
-            // mood = functions.convertKToPercent(mood, 0);
-            // mood = functions.colorPercentValue(mood);
-            const mood = 50;
+            let mood = average(neighbor.mood);
+            mood = convertKToPercent(mood, 0);
             list.push('<div class="list-item">' + neighbor.getName() + '&nbsp;&rarr;&nbsp;' + mood + '&nbsp;%' + '</div>');
         }
         return list.join('');

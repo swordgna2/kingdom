@@ -49,19 +49,16 @@ button:hover {
 
 .main-header {
     position: relative;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
+    text-align: center;
     background: #f0f0f0;
     box-shadow: 0 0 4px silver;
     z-index: 2;
 }
 
 .main-header span {
-    user-select: none;
-}
-.main-header span + span {
-    margin-left: 20px;
+    display: inline-block;
+    padding: 10px;
+    cursor: default;
 }
 
 .main-container {
@@ -200,10 +197,16 @@ button:hover {
 
 .main-footer {
     position: relative;
-    padding: 10px;
+    text-align: center;
     background: #f0f0f0;
     box-shadow: 0 0 4px silver;
     z-index: 2;
+}
+
+.main-footer > span {
+    display: inline-block;
+    padding: 10px;
+    cursor: default;
 }
 
 .list-item {

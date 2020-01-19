@@ -12,16 +12,7 @@
                     <div class="statistics-list-caption">{{ getItemName(item) }}</div>
                     <div class="statistics-list-value">
                         <value-boolean v-if="getItemType(item, group) === 'Boolean'" :value="myKingdom[groupIndex][itemIndex]"/>
-                        <!--<span v-if="getItemType(item, group) === 'Boolean'">
-                            <span v-if="myKingdom[groupIndex][itemIndex]"><font-awesome-icon icon="check-square"/>&nbsp;да</span>
-                            <span v-else><font-awesome-icon icon="times-circle"/>&nbsp;нет</span>
-                        </span>-->
                         <value-k-to-percent v-else-if="getItemType(item, group) === 'kToPercent'" :value="myKingdom[groupIndex][itemIndex]"/>
-                        <!--<span v-else-if="getItemType(item, group) === 'kToPercent'">
-                            <font-awesome-icon icon="exclamation-triangle" class="bad-condition" v-if="myKingdom[groupIndex][itemIndex] < 0.333"/>
-                            <font-awesome-icon icon="check-square" class="good-condition" v-else-if="myKingdom[groupIndex][itemIndex] > 0.667"/>
-                            {{ convertKToPercent(myKingdom[groupIndex][itemIndex]) }}
-                        </span>-->
                         <span v-else v-html="myKingdom[groupIndex][itemIndex]"/>
                     </div>
                     <div class="statistics-list-dimension">{{ getItemDimension(item, group) }}</div>
@@ -64,11 +55,6 @@
             getItemType (item, group) {
                 return (typeof item === 'object' && item !== null) ? item.type || group.type : group.type;
             },
-            /* convertKToPercent (k, precision) {
-                k = isNaN(k) ? 0 : k;
-                precision = isNaN(precision) ? 0 : precision.toFixed(0);
-                return (k * 100).toFixed(precision);
-            }, */
             getItemDimension (item, group) {
                 const type = (typeof item === 'object' && item !== null) ? item.type || group.type : group.type;
                 if (type === 'Boolean') {

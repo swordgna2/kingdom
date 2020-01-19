@@ -21,7 +21,7 @@
                     />
                 </div>
             </div>
-            <FooterPanel/>
+            <FooterPanel @openModal="openModal"/>
             <Modal ref="modal"/>
         </div>
     </v-app>
