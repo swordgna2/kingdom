@@ -5,6 +5,7 @@
                 <font-awesome-icon icon="plus" v-if="groupsCollapsed[groupIndex]"/>
                 <font-awesome-icon icon="minus" v-else/>
                 &nbsp;{{ group.caption }}
+                <help v-if="group.help" :code="group.help" @openModal="openModal"/>
             </div>
             <div class="statistics-group-data" v-if="!groupsCollapsed[groupIndex]">
                 <div class="statistics-list-row" v-for="(item, itemIndex) in group.sub" :key="itemIndex">
@@ -33,9 +34,13 @@
 <script>
     import statisticsScheme from '../assets/statisticsScheme.json';
     import KingdomClass from '../classes/KingdomClass';
+    import Help from './Help';
 
     export default {
         name: 'StatisticsPanel',
+        components: {
+            Help
+        },
         props: {
             myKingdom: KingdomClass
         },
@@ -69,6 +74,9 @@
                     return '%';
                 }
                 return (typeof item === 'object' && item !== null) ? item.dimension || group.dimension : group.dimension;
+            },
+            openModal (data) {
+                this.$emit('openModal', data);
             }
         }
     };

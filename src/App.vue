@@ -1,90 +1,6 @@
 <template>
-    <div class="main-wrapper">
-        <v-app id="inspire">
-            <div class="text-center">
-                <v-dialog
-                    v-model="dialog"
-                    width="500"
-                >
-                    <template v-slot:activator="{ on }">
-                        <v-btn
-                            color="red lighten-2"
-                            dark
-                            v-on="on"
-                        >
-                            Click Me
-                        </v-btn>
-                    </template>
-
-                    <v-card>
-                        <v-card-title
-                            class="headline grey lighten-2"
-                            primary-title
-                        >
-                            Privacy Policy
-                        </v-card-title>
-
-                        <v-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </v-card-text>
-
-                        <v-divider/>
-
-                        <v-card-actions>
-                            <v-spacer/>
-                            <v-btn
-                                color="primary"
-                                text
-                                @click="dialog = false"
-                            >
-                                I accept
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-            </div>
-            <!--<div class="text-center">
-                <v-dialog
-                    v-model="dialog"
-                    width="500"
-                >
-                    <template v-slot:activator="{ on }">
-                        <v-btn
-                            color="red lighten-2"
-                            dark
-                            v-on="on"
-                        >
-                            Click Me
-                        </v-btn>
-                    </template>
-
-                    <v-card>
-                        <v-card-title
-                            class="headline grey lighten-2"
-                            primary-title
-                        >
-                            Privacy Policy
-                        </v-card-title>
-
-                        <v-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </v-card-text>
-
-                        <v-divider/>
-
-                        <v-card-actions>
-                            <v-spacer/>
-                            <v-btn
-                                color="primary"
-                                text
-                                @click="dialog = false"
-                            >
-                                I accept
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-            </div>-->
+    <v-app id="inspire">
+        <div class="main-wrapper">
             <HeaderPanel
                 v-if="myKingdom.year"
                 :my-kingdom="myKingdom"
@@ -99,12 +15,14 @@
                     />
                     <StatisticsPanel
                         :my-kingdom="myKingdom"
+                        @openModal="openModal"
                     />
                 </div>
             </div>
             <FooterPanel/>
-        </v-app>
-    </div>
+            <Modal ref="modal"/>
+        </div>
+    </v-app>
 </template>
 
 <script>
@@ -115,18 +33,20 @@
     import DialogPanel from './components/DialogPanel';
     import StatisticsPanel from './components/StatisticsPanel';
     import FooterPanel from './components/FooterPanel';
+    import Modal from './components/Modal';
     import KingdomClass from './classes/KingdomClass';
 
     export default {
         name: 'app',
+        vuetify: new Vuetify(),
         components: {
             HeaderPanel,
             LogPanel,
             DialogPanel,
             StatisticsPanel,
-            FooterPanel
+            FooterPanel,
+            Modal
         },
-        vuetify: new Vuetify(),
         data () {
             return {
                 myKingdom: new KingdomClass(),
@@ -153,6 +73,9 @@
             },
             log (message) {
                 this.$refs.log.addMessage(message);
+            },
+            openModal (data) {
+                this.$refs.modal.openModal(data);
             }
         }
     };
