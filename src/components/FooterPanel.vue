@@ -9,7 +9,7 @@
     import ModalData from '../assets/modalData';
 
     export default {
-        name: 'FooterPanel',
+        name: 'footerPanel',
         methods: {
             openStatistics () {
                 this.$emit('openModal', ModalData['not-ready']);

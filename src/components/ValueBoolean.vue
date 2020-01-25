@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        name: 'ValueBoolean',
+        name: 'valueBoolean',
         props: {
             value: {
                 type: Boolean,

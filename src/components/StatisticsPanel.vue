@@ -30,7 +30,7 @@
     import ValueKToPercent from './ValueKToPercent';
 
     export default {
-        name: 'StatisticsPanel',
+        name: 'statisticsPanel',
         components: {
             HelpIcon,
             ValueBoolean,

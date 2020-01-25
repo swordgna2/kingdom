@@ -1,25 +1,21 @@
 <template>
     <div class="dialog-container">
-        <component :is="componentName" @openModal="openModal" @done="doneListener" v-bind="componentOptions"/>
+        <component :is="componentName" @openModal="openModal" @done="doneListener" v-bind="componentOptions" :myKingdom="myKingdom"/>
     </div>
 </template>
 
 <script>
     const components = {
-        StartDialog: () => import('../dialogs/startDialog.vue'),
-        DistributeWorkers: () => import('../dialogs/distributeWorkers.vue')
+        startDialog: () => import('../dialogs/startDialog'),
+        distributeWorkers: () => import('../dialogs/distributeWorkers'),
+        war: () => import('../dialogs/war')
     };
 
     export default {
-        name: 'DialogPanel',
+        name: 'dialogPanel',
         components,
         props: {
             myKingdom: Object
-        },
-        $watch: {
-            myKingdom: function (val) {
-                console.log(val);
-            }
         },
         data () {
             return {
@@ -32,23 +28,39 @@
                 this.$emit('openModal', data);
             },
             doneListener (options) {
-                if (this.componentName === 'start-dialog') {
+                switch (this.componentName) {
+                case 'start-dialog':
                     this.startGameWithOptions(options);
+                    this.startNewYear();
+                    break;
+                case 'distribute-workers':
+                    this.war();
+                    break;
+                default:
+                    break;
                 }
             },
             startGameWithOptions (options) {
                 this.$emit('set-kingdom-with-code', options.selectedKingdom);
                 this.myKingdom.difficulty = options.selectedDifficulty;
-                this.startNewYear();
             },
             startNewYear () {
                 this.myKingdom.startNewYear();
                 this.$emit('log', 'Начат новый, ' + this.myKingdom.year + '-й год правления.');
-                this.componentName = '';
-                this.componentOptions = {
-                    myKingdom: this.myKingdom
-                };
+                // this.componentName = '';
+                // this.componentOptions = {
+                //     myKingdom: this.myKingdom
+                // };
                 this.componentName = 'distribute-workers';
+            },
+            war () {
+                if (this.myKingdom.people.warriors > 0) {
+                    // this.componentName = '';
+                    // this.componentOptions = {
+                    //
+                    // }
+                    this.componentName = 'war';
+                }
             }
         }
     };

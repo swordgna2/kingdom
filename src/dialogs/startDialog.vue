@@ -3,7 +3,7 @@
         <v-container>
             <v-row>
                 <v-col cols="12">
-                    <font-awesome-icon icon="globe-europe"/>&nbsp;Выберите королевство, за которое играете:
+                    <font-awesome-icon icon="globe-europe" class="mr-2"/>Выберите королевство, за которое играете:
                 </v-col>
             </v-row>
             <v-row align="center">
@@ -17,13 +17,13 @@
                         filled
                     />
                     <v-btn @click="flushKingdom" class="ml-3 mt-5">
-                        <font-awesome-icon icon="random"/>&nbsp;случайное
+                        <font-awesome-icon icon="random" class="mr-2"/>случайное
                     </v-btn>
                 </v-col>
             </v-row>
             <v-row align="center">
                 <v-col cols="12">
-                    <font-awesome-icon icon="graduation-cap"/>&nbsp;Выберите сложность:
+                    <font-awesome-icon icon="graduation-cap" class="mr-2"/>Выберите сложность:
                 </v-col>
             </v-row>
             <v-row>

@@ -6,7 +6,7 @@
     import ModalData from '../assets/modalData';
 
     export default {
-        name: 'HelpIcon',
+        name: 'helpIcon',
         props: {
             code: undefined
         },

@@ -10,7 +10,7 @@
     import { convertKToPercent } from './../helpers/convertHelper';
 
     export default {
-        name: 'ValueKToPercent',
+        name: 'valueKToPercent',
         props: {
             value: {
                 type: Number,

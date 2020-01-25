@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        name: 'LogPanel',
+        name: 'logPanel',
         data () {
             return {
                 log: [

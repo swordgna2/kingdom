@@ -1,28 +1,28 @@
 <template>
     <v-app id="inspire">
         <div class="main-wrapper">
-            <HeaderPanel
+            <header-panel
                 v-if="myKingdom.year"
                 :my-kingdom="myKingdom"
                 @openModal="openModal"
             />
             <div class="main-container">
                 <div class="main-container-inner">
-                    <LogPanel ref="log"/>
-                    <DialogPanel
+                    <log-panel ref="log"/>
+                    <dialog-panel
                         :my-kingdom="computedKingdom"
                         @set-kingdom-with-code="setKingdomWithCode"
                         @log="log"
                         @openModal="openModal"
                     />
-                    <StatisticsPanel
+                    <statistics-panel
                         :my-kingdom="myKingdom"
                         @openModal="openModal"
                     />
                 </div>
             </div>
-            <FooterPanel @openModal="openModal"/>
-            <Modal ref="modal"/>
+            <footer-panel @openModal="openModal"/>
+            <modal ref="modal"/>
         </div>
     </v-app>
 </template>

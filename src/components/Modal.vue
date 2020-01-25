@@ -33,7 +33,7 @@
     };
 
     export default {
-        name: 'Modal',
+        name: 'modal',
         components,
         vuetify: new Vuetify(),
         data () {

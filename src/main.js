@@ -3,11 +3,11 @@ import Vue from 'vue';
 import App from './App.vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faGlobeEurope, faGraduationCap, faRandom, faMinus, faPlus, faCheckSquare, faTimesCircle, faExclamationTriangle, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faGlobeEurope, faGraduationCap, faRandom, faMinus, faPlus, faCheckSquare, faTimesCircle, faExclamationTriangle, faInfoCircle, faUser, faAngleDoubleLeft, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vuetify from './plugins/vuetify';
 
-library.add(faGlobeEurope, faGraduationCap, faRandom, faMinus, faPlus, faCheckSquare, faTimesCircle, faExclamationTriangle, faInfoCircle);
+library.add(faGlobeEurope, faGraduationCap, faRandom, faMinus, faPlus, faCheckSquare, faTimesCircle, faExclamationTriangle, faInfoCircle, faUser, faAngleDoubleLeft, faUserTimes);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
