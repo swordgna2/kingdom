@@ -143,5 +143,14 @@ export default class KingdomClass {
     startNewYear () {
         this.year++;
         console.log('startNewYear', 'На этом моменте сбрасываются данные с прошлого года и добавляются новые параметры для текущего года.');
+    };
+
+    /**
+     * Получить общее количество населения.
+     *
+     * @returns {number}
+     */
+    getPeopleCount () {
+        return this.people.peasants + this.people.warriors + this.people.workers + this.people.priests;
     }
 }

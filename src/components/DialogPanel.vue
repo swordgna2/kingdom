@@ -44,6 +44,10 @@
             startNewYear () {
                 this.myKingdom.startNewYear();
                 this.$emit('log', 'Начат новый, ' + this.myKingdom.year + '-й год правления.');
+                this.componentName = '';
+                this.componentOptions = {
+                    myKingdom: this.myKingdom
+                };
                 this.componentName = 'distribute-workers';
             }
         }
