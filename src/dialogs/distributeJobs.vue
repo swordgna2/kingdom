@@ -47,10 +47,6 @@
             </v-btn>
             <v-spacer/>
         </v-footer>
-        <p>{{ myKingdom.jobs.crops }}</p>
-        <p>{{ myKingdom.jobs.findNewLands }}</p>
-        <p>{{ myKingdom.jobs.logging }}</p>
-        <p>{{ myKingdom.jobs.mining }}</p>
     </v-container>
 </template>
 

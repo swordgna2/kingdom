@@ -132,15 +132,29 @@ export default class KingdomClass {
         return KingdomClass.names[this.code];
     };
 
+    /**
+     * Получить вёрстку со списком соседей и их настроениями.
+     *
+     * @returns {string}
+     */
     getHtmlWithNeighborsList () {
         const list = [];
         for (let i = 0; i < this.neighbors.length; i++) {
             const neighbor = KingdomClass.kingdoms[this.neighbors[i]];
-            let mood = average(neighbor.mood);
+            let mood = neighbor.getAverageMood();
             mood = convertKToPercent(mood, 0);
             list.push('<div class="list-item">' + neighbor.getName() + '&nbsp;&rarr;&nbsp;' + mood + '&nbsp;%' + '</div>');
         }
         return list.join('');
+    };
+
+    /**
+     * Получить среднее настроение.
+     *
+     * @returns {number}
+     */
+    getAverageMood () {
+        return average(this.mood);
     };
 
     /**
@@ -188,5 +202,17 @@ export default class KingdomClass {
                 }
             }
         }
+    };
+
+    /**
+     * Воевать с другим королевством.
+     *
+     * @param {Number} kingdomId
+     * @returns {string}
+     */
+    warWith (kingdomId) {
+        // todo: проверить, что королевство существует, и это не данное королевство.
+        alert('Воевать с королевством ' + KingdomClass.kingdoms[kingdomId].getName() + ' !!!');
+        return 'ok';
     }
 }
