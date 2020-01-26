@@ -8,6 +8,7 @@
     const components = {
         startDialog: () => import('../dialogs/startDialog'),
         distributeWorkers: () => import('../dialogs/distributeWorkers'),
+        distributeJobs: () => import('../dialogs/distributeJobs'),
         war: () => import('../dialogs/war')
     };
 
@@ -34,6 +35,9 @@
                     this.startNewYear();
                     break;
                 case 'distribute-workers':
+                    this.distributeJobs();
+                    break;
+                case 'distribute-jobs':
                     this.war();
                     break;
                 case 'war':
@@ -51,6 +55,10 @@
                 this.myKingdom.startNewYear();
                 this.$emit('log', 'Начат новый, ' + this.myKingdom.year + '-й год правления.');
                 this.componentName = 'distribute-workers';
+            },
+            distributeJobs () {
+                this.myKingdom.distributeJobsAuto();
+                this.componentName = 'distribute-jobs';
             },
             war () {
                 if (this.myKingdom.people.warriors > 0) {

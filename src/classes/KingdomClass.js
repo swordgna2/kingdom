@@ -76,6 +76,12 @@ export default class KingdomClass {
             priests: getIntegerRandom(16, 32)
         };
 
+        this.jobs = {
+            crops: 0, // посевы
+            logging: 0, // заготовка леса
+            mining: 0 // добыча руды
+        };
+
         this.stocks = {
             money: getIntegerRandom(1000, 2000),
             gold: getIntegerRandom(10, 20),
@@ -152,5 +158,35 @@ export default class KingdomClass {
      */
     getPeopleCount () {
         return this.people.peasants + this.people.warriors + this.people.workers + this.people.priests;
+    };
+
+    /**
+     * Автоматически распределить работы.
+     */
+    distributeJobsAuto () {
+        this.jobs.crops = 0;
+        this.jobs.findNewLands = 0;
+        this.jobs.logging = 0;
+        this.jobs.mining = 0;
+
+        this.jobs.crops = Math.min(this.geo.plain, this.people.peasants);
+        this.jobs.findNewLands = Math.max(this.people.peasants - this.geo.plain, 0);
+        const woodsAndMountains = this.geo.woods + this.geo.mountains;
+        if (woodsAndMountains) {
+            this.jobs.logging = Math.min(this.geo.woods, Math.floor(this.people.workers * this.geo.woods / woodsAndMountains));
+            this.jobs.mining = Math.min(this.geo.mountains, Math.floor(this.people.workers * this.geo.mountains / woodsAndMountains));
+            let workersRest = this.people.workers - this.jobs.logging - this.jobs.mining;
+            if (workersRest > 0) {
+                if (this.jobs.logging < this.geo.woods) {
+                    const workersToLogging = Math.min(this.geo.woods - this.jobs.logging, workersRest);
+                    this.jobs.logging += workersToLogging;
+                    workersRest -= workersToLogging;
+                }
+                if (this.jobs.mining < this.geo.mountains) {
+                    const workersToMining = Math.min(this.geo.mountains - this.jobs.mining, workersRest);
+                    this.jobs.mining += workersToMining;
+                }
+            }
+        }
     }
 }

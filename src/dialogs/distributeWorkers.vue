@@ -64,21 +64,25 @@
                 </v-btn>
             </v-col>
         </v-row>
-        <v-row>
+        <v-row class="list-item">
             <v-col cols="1">
                 <font-awesome-icon icon="user-times"/>
             </v-col>
             <v-col cols="8">
-                Не распределены
+                <v-label>
+                    Не распределены
+                </v-label>
             </v-col>
             <v-col cols="3">
                 {{ notDistributed }}
             </v-col>
         </v-row>
-        <v-row>
+        <v-row class="list-item">
             <v-col cols="1"/>
             <v-col cols="8">
-                Итого
+                <v-label>
+                    Итого
+                </v-label>
             </v-col>
             <v-col cols="3">
                 {{ maxPeople }}
@@ -97,7 +101,7 @@
                 <div v-if="workersDistributed" class="people-divide" :style="'width: ' + workersDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #A0A0A0; background: #D8D8D8;'">Рабочие: {{ workersDistributed }} чел.</div>
                 <div v-if="warriorsDistributed" class="people-divide" :style="'width: ' + warriorsDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #8080FF; background: #C0C0FF;'">Воины: {{ warriorsDistributed }} чел.</div>
                 <div v-if="priestsDistributed" class="people-divide" :style="'width: ' + priestsDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #FF8080; background: #FFC0C0;'">Священники: {{ priestsDistributed }} чел.</div>
-                <div v-if="notDistributed" class="people-divide" :style="'width: ' + notDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #808080; background: #C0C0C0;'">Не распределены: {{ notDistributed }} чел.</div>
+                <div v-if="notDistributed" class="people-divide" :style="'width: ' + notDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #808080; background: #C0C0C0;'">Безработные: {{ notDistributed }} чел.</div>
             </v-col>
         </v-row>
     </v-container>
