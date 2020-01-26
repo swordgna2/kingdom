@@ -72,8 +72,8 @@ export default class KingdomClass {
         this.people = {
             peasants: getIntegerRandom(100, 200),
             workers: getIntegerRandom(50, 100),
-            warriors: getIntegerRandom(25, 50),
-            priests: getIntegerRandom(10, 20)
+            warriors: getIntegerRandom(34, 68),
+            priests: getIntegerRandom(16, 32)
         };
 
         this.stocks = {

@@ -1,8 +1,11 @@
 <template>
     <v-container v-if="ready">
         <v-row>
-            <v-col cols="12">
+            <v-col cols="11">
                 Распределите население
+            </v-col>
+            <v-col cols="1">
+                <help-icon code="people-distribution" @openModal="openModal"/>
             </v-col>
         </v-row>
         <v-row>
@@ -88,12 +91,24 @@
             </v-btn>
             <v-spacer/>
         </v-footer>
+        <v-row v-if="maxPeople">
+            <v-col class="text-no-wrap overflow-hidden">
+                <div v-if="peasantsDistributed" class="people-divide" :style="'width: ' + peasantsDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #80FF80; background: #C0FFC0;'">Крестьяне: {{ peasantsDistributed }} чел.</div>
+                <div v-if="workersDistributed" class="people-divide" :style="'width: ' + workersDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #A0A0A0; background: #D8D8D8;'">Рабочие: {{ workersDistributed }} чел.</div>
+                <div v-if="warriorsDistributed" class="people-divide" :style="'width: ' + warriorsDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #8080FF; background: #C0C0FF;'">Воины: {{ warriorsDistributed }} чел.</div>
+                <div v-if="priestsDistributed" class="people-divide" :style="'width: ' + priestsDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #FF8080; background: #FFC0C0;'">Священники: {{ priestsDistributed }} чел.</div>
+                <div v-if="notDistributed" class="people-divide" :style="'width: ' + notDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #808080; background: #C0C0C0;'">Не распределены: {{ notDistributed }} чел.</div>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 
 <script>
+    import HelpIcon from '../components/HelpIcon';
+
     export default {
         name: 'DistributeWorkers',
+        components: { HelpIcon },
         props: {
             myKingdom: Object
         },
@@ -151,6 +166,9 @@
                 this.notDistributed = 0;
                 this.maxPeople = this.myKingdom.getPeopleCount();
             },
+            openModal (data) {
+                this.$emit('openModal', data);
+            },
             proceed () {
                 this.$emit('done');
             }
@@ -164,3 +182,12 @@
         }
     };
 </script>
+
+<style>
+    .people-divide {
+        display: inline-block;
+        overflow: visible;
+        transition: 0.3s;
+        padding: 5px 10px;
+    }
+</style>

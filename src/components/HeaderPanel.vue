@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        name: 'header',
+        name: 'headerPanel',
         props: {
             year: Number,
             myKingdom: Object

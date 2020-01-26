@@ -36,6 +36,9 @@
                 case 'distribute-workers':
                     this.war();
                     break;
+                case 'war':
+                    this.warOtherCountries();
+                    break;
                 default:
                     break;
                 }
@@ -47,20 +50,18 @@
             startNewYear () {
                 this.myKingdom.startNewYear();
                 this.$emit('log', 'Начат новый, ' + this.myKingdom.year + '-й год правления.');
-                // this.componentName = '';
-                // this.componentOptions = {
-                //     myKingdom: this.myKingdom
-                // };
                 this.componentName = 'distribute-workers';
             },
             war () {
                 if (this.myKingdom.people.warriors > 0) {
-                    // this.componentName = '';
-                    // this.componentOptions = {
-                    //
-                    // }
                     this.componentName = 'war';
+                } else {
+                    this.warOtherCountries();
                 }
+            },
+            warOtherCountries () {
+                this.myKingdom.warOtherCountries();
+                console.log('Воюют остальные страны');
             }
         }
     };
