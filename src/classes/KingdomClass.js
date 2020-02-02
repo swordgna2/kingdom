@@ -1,35 +1,30 @@
 import kingdomNames from '../assets/kingdomNames';
-import { getIntegerRandom, getBooleanRandom } from './../helpers/randomHelper';
+import { getIntegerRandom, getBooleanRandom, getKRandomWidthDifficulty } from './../helpers/randomHelper';
 import { average, convertKToPercent } from './../helpers/convertHelper';
 
 export default class KingdomClass {
-    /**
-     * Королевства.
-     *
-     * @type {Array}
-     */
+    /** @type {Array} Королевства. */
     static kingdoms = [];
 
-    /**
-     * Код королевства.
-     *
-     * @type {Number}
-     */
+    /** @type {Number} Код королевства. */
     code = null;
 
-    /**
-     * Соседи.
-     *
-     * @type {Array}
-     */
+    /** @type {Array} Соседи. */
     neighbors = [];
 
-    /**
-     * Год.
-     *
-     * @type {number}
-     */
+    /** @type {Number} Год. */
     year = 0;
+
+    difficulty = 'normal';
+
+    /** @type {Boolean} Признак существования королевства. */
+    live = true;
+
+    /** @type {Object} Результаты войны данного королевства с указанным. */
+    warResults = {};
+
+    /** @type {Number} Военная сила. */
+    warForce = 0;
 
     /**
      * Автоматически создать все страны.
@@ -208,11 +203,80 @@ export default class KingdomClass {
      * Воевать с другим королевством.
      *
      * @param {Number} kingdomId
-     * @returns {string}
      */
     warWith (kingdomId) {
-        // todo: проверить, что королевство существует, и это не данное королевство.
-        alert('Воевать с королевством ' + KingdomClass.kingdoms[kingdomId].getName() + ' !!!');
-        return 'ok';
+        if (this.code === kingdomId) {
+            this.setWarResultsWithErrorMessage('Невозможно воевать с самим собой!');
+            return;
+        }
+
+        this.warResults = {
+            alien: KingdomClass.kingdoms[kingdomId]
+        };
+        if (typeof this.warResults.alien === 'undefined' || this.warResults.alien === null) {
+            this.setWarResultsWithErrorMessage('Королевства с кодом ' + kingdomId + ' не существует!');
+            return;
+        }
+
+        this.warResults.alienName = this.warResults.alien.getName();
+        this.warResults.selfForce = this.calculateWarForce(false);
+        this.warResults.alienForce = this.warResults.alien.calculateWarForce(true);
+        this.warResults.k = this.warResults.selfForce / this.warResults.alienForce;
+        this.win = this.warResults.k > 1;
+        if (this.win) {
+            this.warResults.data = this.setWarTrophies();
+        } else {
+            this.warResults.data = this.setWarCasualties();
+        }
+        // todo: Если королевство защищается, результаты труда должны быть ухудшены.
+    };
+
+    /**
+     * Установить результаты войны с сообщением об ошибке.
+     *
+     * @param {string} errorMessage
+     */
+    setWarResultsWithErrorMessage (errorMessage) {
+        this.warResults = {
+            error: true,
+            errorMessage: errorMessage
+        };
+    };
+
+    /**
+     * Рассчитать военную силу.
+     * Если за данное королевство играет игрок, то работает коэффициент, случайно изменяющий результат в зависимости от сложности игры (0.5 ... 1.5).
+     * Если признак defends установлен, сила увеличивается на 10% от работников и крестьян.
+     * Сила увеличивается на 10%, если в королевстве есть хотя бы 10% священников.
+     *
+     * @param {Boolean} defends - защищается (признак королевства, принимающего бой)
+     * @returns {Number}
+     */
+    calculateWarForce (defends) {
+        let warForce = this.people.warriors;
+        if (this.difficulty) {
+            warForce = warForce / 2 + warForce * getKRandomWidthDifficulty(this.difficulty);
+        }
+        if (defends) {
+            warForce += (this.people.peasants + this.people.workers) * 0.1;
+        }
+        if (this.people.priests > (this.people.peasants + this.people.workers + this.people.priests) * 0.1) {
+            warForce *= 1.1;
+        }
+        return warForce;
+    }
+
+    /**
+     * Установить военные трофеи по результатам войны.
+     */
+    setWarTrophies () {
+        // todo: в зависимости от результатов войны установить военные трофеи.
+    }
+
+    /**
+     * Установить военные потери по результатам войны.
+     */
+    setWarCasualties () {
+        // todo: в зависимости от результатов войны установить военные потери.
     }
 }

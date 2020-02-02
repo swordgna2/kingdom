@@ -59,7 +59,8 @@
             HelpIcon
         },
         props: {
-            myKingdom: Object
+            myKingdom: Object,
+            testMode: Boolean
         },
         data () {
             return {
@@ -94,6 +95,9 @@
             this.logging = this.myKingdom.jobs.logging;
             this.mining = this.myKingdom.jobs.mining;
             this.loggingAndMining = this.logging + this.mining;
+            if (this.testMode) {
+                this.proceed();
+            }
         }
     };
 </script>

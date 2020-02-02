@@ -1,6 +1,6 @@
 <template>
     <div class="dialog-container">
-        <component :is="componentName" @openModal="openModal" @done="doneListener" v-bind="componentOptions" :myKingdom="myKingdom"/>
+        <component :is="componentName" @openModal="openModal" @done="doneListener" v-bind="componentOptions" :myKingdom="myKingdom" :testMode="true"/>
     </div>
 </template>
 

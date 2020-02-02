@@ -56,6 +56,9 @@
 
     export default {
         name: 'StartDialog',
+        props: {
+            testMode: Boolean
+        },
         data () {
             return {
                 selectedKingdom: null,
@@ -75,7 +78,7 @@
                         text: 'нормально'
                     },
                     {
-                        id: 'difficult',
+                        id: 'hard',
                         text: 'сложно'
                     }
                 ]
@@ -109,6 +112,12 @@
                         body: 'Выберите королевство, за которое играете.'
                     });
                 }
+            }
+        },
+        created () {
+            if (this.testMode) {
+                this.flushKingdom();
+                this.proceed();
             }
         }
     };

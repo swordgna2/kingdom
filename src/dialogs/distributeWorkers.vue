@@ -64,13 +64,13 @@
                 </v-btn>
             </v-col>
         </v-row>
-        <v-row class="list-item">
+        <v-row :class="'list-item ' + ( notDistributed ? 'red--text' : 'green--text' )">
             <v-col cols="1">
                 <font-awesome-icon icon="user-times"/>
             </v-col>
             <v-col cols="8">
                 <v-label>
-                    Не распределены
+                    {{ ( notDistributed ? 'Безработные' : 'Безработных нет' ) }}
                 </v-label>
             </v-col>
             <v-col cols="3">
@@ -101,7 +101,7 @@
                 <div v-if="workersDistributed" class="people-divide" :style="'width: ' + workersDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #A0A0A0; background: #D8D8D8;'">Рабочие: {{ workersDistributed }} чел.</div>
                 <div v-if="warriorsDistributed" class="people-divide" :style="'width: ' + warriorsDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #8080FF; background: #C0C0FF;'">Воины: {{ warriorsDistributed }} чел.</div>
                 <div v-if="priestsDistributed" class="people-divide" :style="'width: ' + priestsDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #FF8080; background: #FFC0C0;'">Священники: {{ priestsDistributed }} чел.</div>
-                <div v-if="notDistributed" class="people-divide" :style="'width: ' + notDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #808080; background: #C0C0C0;'">Безработные: {{ notDistributed }} чел.</div>
+                <div v-if="notDistributed" class="people-divide" :style="'width: ' + notDistributed / maxPeople * 100 + '%; box-shadow: inset 0 0 4px 0 #808080; background: #C0C0C0; color: red;'">Безработные: {{ notDistributed }} чел.</div>
             </v-col>
         </v-row>
     </v-container>
@@ -114,7 +114,8 @@
         name: 'DistributeWorkers',
         components: { HelpIcon },
         props: {
-            myKingdom: Object
+            myKingdom: Object,
+            testMode: Boolean
         },
         data () {
             return {
@@ -183,6 +184,9 @@
             this.workersDistributed = this.myKingdom.people.workers;
             this.warriorsDistributed = this.myKingdom.people.warriors;
             this.priestsDistributed = this.myKingdom.people.priests;
+            if (this.testMode) {
+                this.proceed();
+            }
         }
     };
 </script>

@@ -26,17 +26,20 @@
                     Война !
                 </v-btn>
             </v-col>
-            <v-col cols="11" v-if="scouts[neighborId] && scoutsLeft">
+            <v-col cols="10" v-if="scouts[neighborId]">
                 <v-slider v-model="scoutsSent[neighborId]" :max="Math.min(10, scoutsLeft + scoutsSent[neighborId])" step="1" label="Разведчики" @input="recalculateScoutsLeft"/>
             </v-col>
-            <v-col cols="1" v-if="scouts[neighborId] && scoutsLeft">
+            <v-col cols="1" v-if="scouts[neighborId]">
+                {{ scoutsSent[neighborId] }}
+            </v-col>
+            <v-col cols="1" v-if="scouts[neighborId]">
                 <help-icon code="not-ready" @openModal="openModal"/>
             </v-col>
         </v-row>
         <v-footer>
             <v-spacer/>
             <v-btn @click="proceed">
-                Не воевать
+                Ни с кем не воевать
             </v-btn>
             <v-spacer/>
         </v-footer>
@@ -77,18 +80,29 @@
             sendScouts (neighborId) {
                 this.$set(this.scouts, neighborId, !this.scouts[neighborId]);
                 this.scoutsSent[neighborId] = 0;
+                this.recalculateScoutsLeft();
             },
             recalculateScoutsLeft () {
-                this.scoutsLeft = this.myKingdom.people.priests;
+                let scoutsLeft = this.myKingdom.people.priests;
                 for (const i in this.scoutsSent) {
                     if (this.scoutsSent[i] > 0) {
-                        this.scoutsLeft -= this.scoutsSent[i];
+                        scoutsLeft -= this.scoutsSent[i];
                     }
                 }
+                this.scoutsLeft = scoutsLeft;
             },
             warWith (neighborId) {
-                const warResults = this.myKingdom.warWith(neighborId);
-                console.log('Результаты войны:', warResults);
+                this.myKingdom.warWith(neighborId);
+                if (this.myKingdom.warResults.error) {
+                    this.$emit('openModal', {
+                        type: 'alert',
+                        body: this.myKingdom.warResults.errorMessage
+                    });
+                }
+                this.$emit('openModal', {
+                    body: 'Смотрите результаты войны в консоли (разработка)'
+                });
+                console.log('Результаты войны:', this.myKingdom.warResults);
             },
             proceed () {
                 this.$emit('done', {
