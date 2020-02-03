@@ -5,7 +5,7 @@
                 Будем воевать ?
             </v-col>
             <v-col cols="1">
-                <help-icon code="not-ready" @openModal="openModal"/>
+                <help-icon code="war" @openModal="openModal"/>
             </v-col>
         </v-row>
         <v-row v-for="(neighborId, index) in myKingdom.neighbors" :key="index">
@@ -33,7 +33,7 @@
                 {{ scoutsSent[neighborId] }}
             </v-col>
             <v-col cols="1" v-if="scouts[neighborId]">
-                <help-icon code="not-ready" @openModal="openModal"/>
+                <help-icon code="scouts" @openModal="openModal"/>
             </v-col>
         </v-row>
         <v-footer>
@@ -60,6 +60,7 @@
             return {
                 scouts: {},
                 scoutsSent: {},
+                scoutsTotal: 0,
                 scoutsLeft: 0
             };
         },
@@ -83,13 +84,14 @@
                 this.recalculateScoutsLeft();
             },
             recalculateScoutsLeft () {
-                let scoutsLeft = this.myKingdom.people.priests;
+                let scoutsTotal = 0;
                 for (const i in this.scoutsSent) {
                     if (this.scoutsSent[i] > 0) {
-                        scoutsLeft -= this.scoutsSent[i];
+                        scoutsTotal += this.scoutsSent[i];
                     }
                 }
-                this.scoutsLeft = scoutsLeft;
+                this.scoutsTotal = scoutsTotal;
+                this.scoutsLeft = this.myKingdom.people.priests - scoutsTotal;
             },
             warWith (neighborId) {
                 this.myKingdom.warWith(neighborId);
@@ -106,8 +108,10 @@
             },
             proceed () {
                 this.$emit('done', {
-                    scouts: this.scouts,
-                    scoutsSent: this.scoutsSent
+                    scouts: {
+                        sent: this.scoutsSent,
+                        total: this.scoutsTotal
+                    }
                 });
             }
         },

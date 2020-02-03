@@ -268,9 +268,29 @@ export default class KingdomClass {
 
     /**
      * Установить военные трофеи по результатам войны.
+     * Если превосходство больше 2, то есть вероятность забрать всё.
      */
     setWarTrophies () {
-        // todo: в зависимости от результатов войны установить военные трофеи.
+        if (this.warResults.k > 2 && getKRandomWidthDifficulty(this.difficulty) > 0.5) {
+            // Забрать всё
+            this.warResults.data.geo = {
+                plain: this.warResults.alien.geo.plain,
+                woods: this.warResults.alien.geo.woods,
+                mountains: this.warResults.alien.geo.mountains
+            };
+            this.warResults.data.stocks = this.warResults.alien.stocks;
+            this.warResults.alien.live = false;
+        } else {
+            this.warResults.data.geo = {
+                plain: Math.round(getKRandomWidthDifficulty(this.difficulty) * this.warResults.alien.geo.plain),
+                woods: Math.round(getKRandomWidthDifficulty(this.difficulty) * this.warResults.alien.geo.woods),
+                mountains: Math.round(getKRandomWidthDifficulty(this.difficulty) * this.warResults.alien.geo.mountains)
+            };
+            this.warResults.data.stocks = {};
+            for (const goodType of Object.keys(this.warResults.alien.stocks)) {
+                this.warResults.data.stocks[goodType] = Math.round(getKRandomWidthDifficulty(this.difficulty) * this.warResults.alien.stocks[goodType]);
+            }
+        }
     }
 
     /**

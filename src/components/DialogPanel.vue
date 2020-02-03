@@ -41,6 +41,7 @@
                     this.war();
                     break;
                 case 'war':
+                    this.myKingdom.scouts = options.scouts;
                     this.warOtherCountries();
                     break;
                 default:
